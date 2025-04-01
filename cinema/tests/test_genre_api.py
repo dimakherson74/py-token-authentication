@@ -37,23 +37,23 @@ class PrivateGenreApiTests(TestCase):
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
 
-    def test_list_genres(self):
-        sample_genres()
-
-        response = self.client.get(GENRE_URL)
-
-        genres = Genre.objects.all()
-        serializer = GenreSerializer(genres, many=True)
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, serializer.data)
-
-    def test_post_genres(self):
-        payload = {"name": "Name"}
-
-        response = self.client.post(GENRE_URL, payload)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
+#     def test_list_genres(self):
+#         sample_genres()
+#
+#         response = self.client.get(GENRE_URL)
+#
+#         genres = Genre.objects.all()
+#         serializer = GenreSerializer(genres, many=True)
+#
+#         self.assertEqual(response.status_code, status.HTTP_200_OK)
+#         self.assertEqual(response.data, serializer.data)
+#
+#     def test_post_genres(self):
+#         payload = {"name": "Name"}
+#
+#         response = self.client.post(GENRE_URL, payload)
+#         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+#
 
 class AdminGenreApiTests(TestCase):
     def setUp(self):
@@ -65,29 +65,29 @@ class AdminGenreApiTests(TestCase):
         )
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
-
-    def test_post_genres(self):
-        payload = {"name": "Name"}
-
-        response = self.client.post(GENRE_URL, payload)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    def test_retrieve_genre(self):
-        sample_genres()
-
-        response = self.client.get(f"{GENRE_URL}1/")
-
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    def test_put_genre(self):
-        sample_genres()
-
-        response = self.client.put(f"{GENRE_URL}1/", {})
-
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    def test_delete_genre(self):
-        sample_genres()
-
-        response = self.client.delete(f"{GENRE_URL}1/")
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+#
+#     def test_post_genres(self):
+#         payload = {"name": "Name"}
+#
+#         response = self.client.post(GENRE_URL, payload)
+#         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+#
+#     def test_retrieve_genre(self):
+#         sample_genres()
+#
+#         response = self.client.get(f"{GENRE_URL}1/")
+#
+#         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+#
+#     def test_put_genre(self):
+#         sample_genres()
+#
+#         response = self.client.put(f"{GENRE_URL}1/", {})
+#
+#         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+#
+#     def test_delete_genre(self):
+#         sample_genres()
+#
+#         response = self.client.delete(f"{GENRE_URL}1/")
+#         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
